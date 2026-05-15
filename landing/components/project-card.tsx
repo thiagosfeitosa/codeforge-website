@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { T } from "@/lib/i18n";
 
 type ProjectCardProps = {
-  title: string;
-  category: string;
-  description: string;
+  title: ReactNode;
+  category: ReactNode;
+  description: ReactNode;
   tags: string[];
 };
 
@@ -31,7 +33,7 @@ export function ProjectCard({ title, category, description, tags }: ProjectCardP
           type="button"
           className="mt-auto inline-flex w-fit items-center gap-2 pt-8 text-sm font-bold text-white transition hover:text-[var(--orange)]"
         >
-          View Case Study <ArrowUpRight size={16} aria-hidden="true" />
+          <T k="cta.viewCaseStudy" /> <ArrowUpRight size={16} aria-hidden="true" />
         </button>
       </div>
     </article>

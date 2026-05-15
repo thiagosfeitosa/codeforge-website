@@ -1,9 +1,10 @@
+import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 
 type ServiceCardProps = {
   icon: LucideIcon;
-  title: string;
-  description: string;
+  title: ReactNode;
+  description: ReactNode;
 };
 
 export function ServiceCard({ icon: Icon, title, description }: ServiceCardProps) {

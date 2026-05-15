@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bot, Code2, Mail, MapPin, Sparkles } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
 import { PageHero } from "@/components/page-hero";
+import { T } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -15,18 +16,18 @@ export const metadata: Metadata = {
 
 const contactCards = [
   {
-    title: "Email",
+    titleKey: "contact.card.email",
     value: siteConfig.email,
     icon: Mail,
   },
   {
-    title: "Location",
+    titleKey: "contact.card.location",
     value: "Florida, USA / Remote",
     icon: MapPin,
   },
   {
-    title: "Services",
-    value: "Software Consulting, AI Automation, Full-Stack Development",
+    titleKey: "contact.card.services",
+    valueKey: "contact.card.servicesValue",
     icon: Code2,
   },
 ];
@@ -35,9 +36,9 @@ export default function ContactPage() {
   return (
     <div className="page-shell">
       <PageHero
-        kicker="Contact"
-        title="Let&apos;s Forge Your Next Digital Product"
-        description="Share what you are building, modernizing, or automating. CodeForge can help shape the technical path and turn the idea into a practical product experience."
+        kicker={<T k="contact.kicker" />}
+        title={<T k="contact.title" />}
+        description={<T k="contact.description" />}
       />
 
       <section className="section">
@@ -46,12 +47,10 @@ export default function ContactPage() {
             <div className="surface p-7">
               <Sparkles className="text-[var(--orange)]" size={30} />
               <h2 className="mt-7 text-3xl font-black text-white">
-                Start with the problem, then forge the system around it.
+                <T k="contact.panel.title" />
               </h2>
               <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
-                The first conversation is about understanding the workflow,
-                business goal, timeline, and technical constraints. The result
-                should be a path that feels concrete, not vague.
+                <T k="contact.panel.description" />
               </p>
             </div>
 
@@ -59,13 +58,15 @@ export default function ContactPage() {
               {contactCards.map((item) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.title} className="panel flex gap-4 p-5">
+                  <div key={item.titleKey} className="panel flex gap-4 p-5">
                     <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[8px] bg-[rgba(255,106,26,0.1)] text-[var(--orange)]">
                       <Icon size={20} />
                     </span>
                     <div>
-                      <p className="text-sm font-black text-white">{item.title}</p>
-                      <p className="mt-1 text-sm leading-6 text-[var(--muted)]">{item.value}</p>
+                      <p className="text-sm font-black text-white"><T k={item.titleKey} /></p>
+                      <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
+                        {item.valueKey ? <T k={item.valueKey} /> : item.value}
+                      </p>
                     </div>
                   </div>
                 );
@@ -77,10 +78,9 @@ export default function ContactPage() {
                 <Bot size={20} />
               </span>
               <div>
-                <p className="text-sm font-black text-white">AI-ready conversations</p>
+                <p className="text-sm font-black text-white"><T k="contact.ai.title" /></p>
                 <p className="mt-1 text-sm leading-6 text-[var(--muted)]">
-                  Bring workflow bottlenecks, repetitive operations, or product
-                  ideas that could benefit from intelligent automation.
+                  <T k="contact.ai.description" />
                 </p>
               </div>
             </div>

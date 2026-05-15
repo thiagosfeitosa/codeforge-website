@@ -5,12 +5,16 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
+import { LanguageSelector } from "@/components/language-selector";
 import { SparkButton } from "@/components/spark-button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/cn";
+import { useI18n } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -24,14 +28,14 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition duration-300",
+        "site-header fixed inset-x-0 top-0 z-50 border-b transition duration-300",
         scrolled
-          ? "border-white/10 bg-[#0f1115]/88 shadow-[0_14px_42px_rgba(0,0,0,0.28)] backdrop-blur-xl"
-          : "border-white/6 bg-[#0f1115]/58 backdrop-blur-lg",
+          ? "site-header-scrolled shadow-[0_14px_42px_rgba(0,0,0,0.28)] backdrop-blur-xl"
+          : "backdrop-blur-lg",
       )}
     >
       <div className="shell flex min-h-[74px] items-center justify-between gap-6">
-        <BrandLogo />
+        <BrandLogo variant="plain-white" stackedText />
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
           {siteConfig.nav.map((item) => (
@@ -43,28 +47,34 @@ export function SiteHeader() {
                 pathname === item.href && "text-white",
               )}
             >
-              {item.label}
+              {t(item.labelKey)}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <SparkButton href="/contact">Start a Project</SparkButton>
+        <div className="hidden items-center gap-3 lg:flex">
+          <LanguageSelector />
+          <ThemeToggle />
+          <SparkButton href="/contact">{t("cta.startProject")}</SparkButton>
         </div>
 
-        <button
-          type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-[8px] border border-white/10 bg-white/[0.05] text-white lg:hidden"
-          onClick={() => setOpen((value) => !value)}
-          aria-label={open ? "Close navigation" : "Open navigation"}
-          aria-expanded={open}
-        >
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSelector />
+          <ThemeToggle />
+          <button
+            type="button"
+            className="theme-menu-button inline-flex h-11 w-11 items-center justify-center rounded-[8px]"
+            onClick={() => setOpen((value) => !value)}
+            aria-label={open ? "Close navigation" : "Open navigation"}
+            aria-expanded={open}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <div className="border-t border-white/8 bg-[#0f1115]/96 backdrop-blur-xl lg:hidden">
+        <div className="site-mobile-menu border-t backdrop-blur-xl lg:hidden">
           <div className="shell grid gap-2 py-4">
             {siteConfig.nav.map((item) => (
               <Link
@@ -76,11 +86,11 @@ export function SiteHeader() {
                 )}
                 onClick={() => setOpen(false)}
               >
-                {item.label}
+                {t(item.labelKey)}
               </Link>
             ))}
             <SparkButton href="/contact" className="mt-2 w-full">
-              Start a Project
+              {t("cta.startProject")}
             </SparkButton>
           </div>
         </div>

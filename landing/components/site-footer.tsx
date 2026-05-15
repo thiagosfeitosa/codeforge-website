@@ -1,10 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
+import { useI18n } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const { t } = useI18n();
 
   return (
     <footer className="forge-footer border-t border-white/8 bg-[#0b0d11] py-16 sm:py-20">
@@ -17,8 +21,7 @@ export function SiteFooter() {
         <div>
           <BrandLogo />
           <p className="mt-5 max-w-md text-sm leading-7 text-[var(--muted)]">
-            Forging scalable software, intelligent workflows, and modern digital
-            experiences.
+            {t("footer.description")}
           </p>
           <div className="mt-6 flex gap-3">
             {[
@@ -42,18 +45,18 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="text-sm font-black uppercase text-white">Links</h2>
+          <h2 className="text-sm font-black uppercase text-white">{t("footer.links")}</h2>
           <div className="mt-5 grid gap-3 text-sm text-[var(--muted)]">
             {siteConfig.nav.map((item) => (
               <Link key={item.href} href={item.href} className="transition hover:text-white">
-                {item.label}
+                {t(item.labelKey)}
               </Link>
             ))}
           </div>
         </div>
 
         <div>
-          <h2 className="text-sm font-black uppercase text-white">Contact</h2>
+          <h2 className="text-sm font-black uppercase text-white">{t("footer.contact")}</h2>
           <div className="mt-5 grid gap-3 text-sm text-[var(--muted)]">
             <a href={`mailto:${siteConfig.email}`} className="transition hover:text-white">
               {siteConfig.email}

@@ -1,11 +1,8 @@
-import Image from "next/image";
+import type { CSSProperties } from "react";
 import {
   Bot,
-  Braces,
   CheckCircle2,
-  CircuitBoard,
   Code2,
-  Cpu,
   Layers3,
   Palette,
   Rocket,
@@ -16,63 +13,69 @@ import { ProjectCard } from "@/components/project-card";
 import { SectionTitle } from "@/components/section-title";
 import { ServiceCard } from "@/components/service-card";
 import { SparkButton } from "@/components/spark-button";
+import { T } from "@/lib/i18n";
 
 const services = [
   {
-    title: "Full-Stack Development",
-    description:
-      "Modern web applications, APIs, integrations, and reliable delivery across the product stack.",
+    titleKey: "service.full.title",
+    descriptionKey: "service.full.description",
     icon: Code2,
   },
   {
-    title: "UX/UI & Front-End Architecture",
-    description:
-      "Interfaces that feel premium, scale cleanly, and stay maintainable as products grow.",
+    titleKey: "service.ux.title",
+    descriptionKey: "service.ux.description",
     icon: Palette,
   },
   {
-    title: "AI & Automation Workflows",
-    description:
-      "Operational systems, AI-assisted workflows, and API automation built around real business processes.",
+    titleKey: "service.ai.title",
+    descriptionKey: "service.ai.description",
     icon: Bot,
   },
   {
-    title: "MVPs & Product Strategy",
-    description:
-      "Focused product paths for startups and teams that need to validate, launch, and iterate quickly.",
+    titleKey: "service.mvp.title",
+    descriptionKey: "service.mvp.description",
     icon: Rocket,
   },
 ];
 
 const projects = [
   {
-    title: "AI Customer Support Workflow",
-    category: "AI Automation",
-    description:
-      "A support intake and response workflow that triages messages, drafts answers, and routes edge cases to humans.",
+    titleKey: "project.support.title",
+    categoryKey: "project.support.category",
+    descriptionKey: "project.support.description",
     tags: ["React", "Node.js", "AI", "APIs"],
   },
   {
-    title: "SaaS MVP Launch Platform",
-    category: "Product Build",
-    description:
-      "A lean launch platform for service businesses with onboarding, admin flows, billing-ready structure, and analytics.",
+    titleKey: "project.saas.title",
+    categoryKey: "project.saas.category",
+    descriptionKey: "project.saas.description",
     tags: ["Next.js", "TypeScript", "Cloud", "UX"],
   },
   {
-    title: "Legacy System Modernization",
-    category: "Modernization",
-    description:
-      "A cleaner interface and API layer around legacy operations, reducing manual work without replacing everything at once.",
+    titleKey: "project.legacy.title",
+    categoryKey: "project.legacy.category",
+    descriptionKey: "project.legacy.description",
     tags: ["React", "Node.js", "APIs", "Cloud"],
   },
 ];
 
 const aboutBullets = [
-  "Senior engineering expertise",
-  "Front-end and full-stack delivery",
-  "Automation and AI integration",
-  "Product-minded execution",
+  "home.about.bullet1",
+  "home.about.bullet2",
+  "home.about.bullet3",
+  "home.about.bullet4",
+];
+
+const editorLines = [
+  { code: "export function LaunchPage() {", indent: 0 },
+  { code: "const product = forge({", indent: 1 },
+  { code: 'strategy: "market-ready",', indent: 2 },
+  { code: 'interface: "premium",', indent: 2 },
+  { code: 'automation: "AI-enabled",', indent: 2 },
+  { code: 'deployment: "scalable",', indent: 2 },
+  { code: "});", indent: 1 },
+  { code: "return <Experience data={product} />;", indent: 1 },
+  { code: "}", indent: 0 },
 ];
 
 export default function HomePage() {
@@ -80,92 +83,78 @@ export default function HomePage() {
     <div className="page-shell">
       <section className="hero-scene relative overflow-visible">
         <div className="grid-lines" aria-hidden="true" />
-        <div className="hero-inner shell grid gap-14 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+        <div className="hero-inner shell grid gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div className="relative z-10">
-            <span className="section-kicker reveal">Software factory for modern teams</span>
-            <h1 className="reveal reveal-delay-1 mt-6 max-w-4xl text-5xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl">
-              Forging <span className="orange-text">Software</span> Solutions
-              for Modern Businesses.
+            <span className="section-kicker reveal"><T k="home.kicker" /></span>
+            <h1 className="reveal reveal-delay-1 mt-6 max-w-4xl text-5xl font-black leading-[1.02] text-white sm:text-6xl lg:text-[4.05rem] xl:text-[4.35rem]">
+              <T k="home.hero.forging" /> <span className="orange-text"><T k="home.hero.software" /></span>{" "}
+              <T k="home.hero.rest" />
             </h1>
             <p className="reveal reveal-delay-2 mt-7 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-              CodeForge helps companies design, build, automate, and scale
-              digital products with full-stack engineering, AI workflows, and
-              modern user experiences.
+              <T k="home.hero.description" />
             </p>
             <div className="reveal reveal-delay-3 mt-9 flex flex-col gap-3 sm:flex-row">
-              <SparkButton href="/contact">Start a Project</SparkButton>
+              <SparkButton href="/contact"><T k="cta.startProject" /></SparkButton>
               <SparkButton href="/projects" variant="secondary">
-                View Projects
+                <T k="cta.viewProjects" />
               </SparkButton>
             </div>
           </div>
 
           <div className="hero-visual reveal reveal-delay-2">
+            <div className="hero-flicker-light" aria-hidden="true" />
             <div className="hero-orbit" aria-hidden="true" />
-            <div className="hero-scanline" aria-hidden="true" />
-            <div className="spark left-[18%] top-[8%]" aria-hidden="true" />
-            <div className="spark right-[12%] top-[20%] [animation-delay:400ms]" aria-hidden="true" />
-            <div className="spark bottom-[22%] left-[12%] [animation-delay:900ms]" aria-hidden="true" />
-            <div className="spark left-[64%] top-[4%] [animation-delay:1200ms]" aria-hidden="true" />
-            <div className="spark bottom-[12%] right-[2%] [animation-delay:1600ms]" aria-hidden="true" />
 
-            <div className="absolute left-1/2 top-12 -translate-x-1/2">
-              <div className="forge-mark">
-                <Image
-                  src="/brand/codeforge-stacked.svg"
-                  alt=""
-                  aria-hidden="true"
-                  width={112}
-                  height={112}
-                  className="forge-mark-logo"
-                />
-              </div>
-            </div>
-
-            <div className="tech-card hero-main-card absolute left-0 top-56 w-[72%] p-6">
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-[8px] bg-[rgba(255,106,26,0.12)] text-[var(--orange)]">
-                  <Cpu size={22} />
-                </span>
-                <div>
-                  <p className="text-sm font-black text-white">AI Automation</p>
-                  <p className="text-xs text-[var(--muted)]">Workflow orchestration</p>
+            <div className="ide-window">
+              <div className="ide-topbar">
+                <div className="ide-traffic" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div className="ide-tabs" aria-label="Code editor tabs">
+                  <span className="active">page.tsx</span>
+                  <span>workflow.ts</span>
+                  <span>deploy.yml</span>
                 </div>
               </div>
-              <div className="mt-6 grid gap-3">
-                {["Full-Stack Engineering", "UX/UI Systems", "API Integrations"].map((item) => (
-                  <div key={item} className="flex items-center justify-between rounded-[8px] border border-white/8 bg-white/[0.04] px-4 py-3">
-                    <span className="text-sm text-[var(--muted)]">{item}</span>
-                    <CheckCircle2 size={17} className="text-[var(--orange)]" />
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            <div className="tech-card hero-metric-card absolute right-0 top-32 w-52 p-5">
-              <p className="text-3xl font-black text-white">17+</p>
-              <p className="mt-1 text-sm text-[var(--muted)]">years experience</p>
-            </div>
-
-            <div className="tech-card hero-mini-card absolute bottom-28 right-0 w-64 p-5">
-              <div className="flex items-center gap-3">
-                <CircuitBoard size={24} className="text-[var(--orange)]" />
-                <div>
-                  <p className="text-sm font-black text-white">AI-ready workflows</p>
-                  <p className="text-xs text-[#cfd3dc]">Systems built to evolve</p>
+              <div className="ide-body">
+                <aside className="ide-sidebar" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                </aside>
+                <div className="ide-editor" aria-label="Animated CodeForge code editor preview">
+                  {editorLines.map((line, index) => (
+                    <div
+                      key={line.code}
+                      className="ide-line"
+                      style={{
+                        "--line-index": index,
+                        "--indent": line.indent,
+                      } as CSSProperties}
+                    >
+                      <span className="ide-line-number">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="ide-code">
+                        {line.code}
+                        {index === editorLines.length - 1 && (
+                          <span className="ide-code-cursor" aria-hidden="true" />
+                        )}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
 
-            <div className="tech-card hero-mini-card absolute bottom-2 left-2 w-60 p-5">
-              <div className="flex items-center gap-3">
-                <Braces size={24} className="text-[var(--orange)]" />
-                <div>
-                  <p className="text-sm font-black text-white">Full-stack delivery</p>
-                  <p className="text-xs text-[#cfd3dc]">Frontend, APIs, cloud</p>
-                </div>
+              <div className="ide-terminal" aria-label="Build status">
+                <span className="terminal-prompt">$</span>
+                <span className="terminal-command">npm run forge</span>
+                <span className="terminal-status">build ready</span>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -175,13 +164,18 @@ export default function HomePage() {
       <section className="section">
         <div className="shell">
           <SectionTitle
-            kicker="What we build"
-            title="Engineering services shaped around products, operations, and growth."
-            description="CodeForge combines senior technical execution with product judgment, so the work supports both the user experience and the business model behind it."
+            kicker={<T k="home.services.kicker" />}
+            title={<T k="home.services.title" />}
+            description={<T k="home.services.description" />}
           />
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {services.map((service) => (
-              <ServiceCard key={service.title} {...service} />
+              <ServiceCard
+                key={service.titleKey}
+                icon={service.icon}
+                title={<T k={service.titleKey} />}
+                description={<T k={service.descriptionKey} />}
+              />
             ))}
           </div>
         </div>
@@ -193,35 +187,34 @@ export default function HomePage() {
             <div className="grid-lines" aria-hidden="true" />
             <div className="surface absolute left-0 top-8 w-[78%] p-7">
               <Layers3 className="text-[var(--orange)]" size={32} />
-              <h2 className="mt-8 text-3xl font-black text-white">Product-minded systems</h2>
+              <h2 className="mt-8 text-3xl font-black text-white"><T k="home.about.cardTitle" /></h2>
               <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
-                Practical software architecture, clear UI systems, and automation
-                paths that map back to the business problem.
+                <T k="home.about.cardDescription" />
               </p>
             </div>
             <div className="surface absolute bottom-4 right-0 w-[68%] border-[rgba(255,106,26,0.26)] p-6">
               <Workflow className="text-[var(--orange)]" size={28} />
-              <p className="mt-6 text-xl font-black">Idea to workflow to product</p>
+              <p className="mt-6 text-xl font-black"><T k="home.about.workflow" /></p>
             </div>
           </div>
 
           <div>
             <SectionTitle
-              kicker="About CodeForge"
-              title="Independent software consulting for teams that need thoughtful execution."
-              description="CodeForge is an independent software consulting practice focused on helping businesses transform ideas, legacy systems, and operational challenges into scalable digital products."
+              kicker={<T k="home.about.kicker" />}
+              title={<T k="home.about.title" />}
+              description={<T k="home.about.description" />}
             />
             <div className="mt-8 grid gap-3">
               {aboutBullets.map((item) => (
                 <div key={item} className="flex items-center gap-3 text-[var(--muted)]">
                   <CheckCircle2 size={18} className="text-[var(--orange)]" />
-                  <span>{item}</span>
+                  <span><T k={item} /></span>
                 </div>
               ))}
             </div>
             <div className="mt-9">
               <SparkButton href="/about" variant="secondary">
-                Learn More About Us
+                <T k="cta.learnAbout" />
               </SparkButton>
             </div>
           </div>
@@ -232,17 +225,23 @@ export default function HomePage() {
         <div className="shell">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <SectionTitle
-              kicker="Featured projects"
-              title="A preview of the kind of systems CodeForge is built to deliver."
-              description="These are placeholder case studies for now, designed so real project stories can replace them cleanly later."
+              kicker={<T k="home.projects.kicker" />}
+              title={<T k="home.projects.title" />}
+              description={<T k="home.projects.description" />}
             />
             <SparkButton href="/projects" variant="secondary" className="w-fit">
-              View All Projects
+              <T k="cta.viewAllProjects" />
             </SparkButton>
           </div>
           <div className="mt-14 grid gap-5 lg:grid-cols-3">
             {projects.map((project) => (
-              <ProjectCard key={project.title} {...project} />
+              <ProjectCard
+                key={project.titleKey}
+                title={<T k={project.titleKey} />}
+                category={<T k={project.categoryKey} />}
+                description={<T k={project.descriptionKey} />}
+                tags={project.tags}
+              />
             ))}
           </div>
         </div>
@@ -253,13 +252,12 @@ export default function HomePage() {
           <div className="surface relative overflow-hidden p-8 sm:p-12 lg:p-16">
             <div className="grid-lines" aria-hidden="true" />
             <div className="relative z-10 max-w-4xl">
-              <span className="section-kicker">Start the forge</span>
+              <span className="section-kicker"><T k="home.final.kicker" /></span>
               <h2 className="mt-5 text-3xl font-black leading-tight text-white sm:text-5xl">
-                Have an idea, workflow, or system that needs to be forged into
-                something better?
+                <T k="home.final.title" />
               </h2>
               <div className="mt-9">
-                <SparkButton href="/contact">Let&apos;s Talk</SparkButton>
+                <SparkButton href="/contact"><T k="cta.letsTalk" /></SparkButton>
               </div>
             </div>
           </div>

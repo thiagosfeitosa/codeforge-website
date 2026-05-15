@@ -1,9 +1,10 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 type SectionTitleProps = {
-  kicker: string;
-  title: string;
-  description?: string;
+  kicker: ReactNode;
+  title: ReactNode;
+  description?: ReactNode;
   align?: "left" | "center";
 };
 

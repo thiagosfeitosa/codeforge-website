@@ -1,7 +1,9 @@
+import type { ReactNode } from "react";
+
 type PageHeroProps = {
-  kicker: string;
-  title: string;
-  description: string;
+  kicker: ReactNode;
+  title: ReactNode;
+  description: ReactNode;
 };
 
 export function PageHero({ kicker, title, description }: PageHeroProps) {
